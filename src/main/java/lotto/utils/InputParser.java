@@ -8,7 +8,7 @@ public class InputParser {
 
     public static List<Integer> parseWinningNumbers(String input) {
         try {
-            List<Integer> winningNumbers = Arrays.stream(input.split(",")).map(String::trim).map(Integer::parseInt)
+            List<Integer> winningNumbers = Arrays.stream(input.split(",", -1)).map(String::trim).map(Integer::parseInt)
                     .collect(Collectors.toList());
 
             if (winningNumbers.size() != 6) {
