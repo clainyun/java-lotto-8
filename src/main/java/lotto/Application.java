@@ -32,6 +32,7 @@ public class Application {
             try {
                 String winningInput = InputView.readWinningNumbers();
                 winningNumbers = InputParser.parseWinningNumbers(winningInput);
+                new Lotto(winningNumbers); // Lotto 객체를 생성하여 당첨 번호 검증
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
