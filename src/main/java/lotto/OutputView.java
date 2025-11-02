@@ -5,12 +5,14 @@ import java.util.Map;
 
 public class OutputView {
 
+    // 구매한 로또 개수와 번호 목록 출력
     public static void printPurchasedLottos(List<Lotto> lottos) {
         System.out.println();
         System.out.println(lottos.size() + "개를 구매했습니다.");
         lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
+    // 당첨 통계 출력
     public static void printStatistics(Map<Rank, Integer> results) {
         System.out.println();
         System.out.println("당첨 통계");
@@ -23,6 +25,7 @@ public class OutputView {
         System.out.println("6개 일치 (2,000,000,000원) - " + results.getOrDefault(Rank.FIRST, 0) + "개");
     }
 
+    // 수익률 출력 (%n은 개행 문자)
     public static void printProfitRate(double profitRate) {
         System.out.printf("총 수익률은 %.1f%%입니다.%n", profitRate);
     }
