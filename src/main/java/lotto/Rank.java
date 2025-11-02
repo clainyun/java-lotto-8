@@ -1,6 +1,8 @@
 package lotto;
 
 public enum Rank {
+
+    // 당첨 등수 정의 (일치 개수, 보너스 번호 일치 여부, 상금)
     FIRST(6, false, 2_000_000_000), SECOND(5, true, 30_000_000), THIRD(5, false, 1_500_000), FOURTH(4, false,
             50_000), FIFTH(3, false, 5_000), MISS(0, false, 0);
 
@@ -14,6 +16,7 @@ public enum Rank {
         this.prize = prize;
     }
 
+    // 일치 개수와 보너스 여부로 등수 판별
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         if (matchCount == 6) {
             return FIRST;
@@ -33,6 +36,7 @@ public enum Rank {
         return MISS;
     }
 
+    // 등수별 상금 반환
     public int getPrize() {
         return prize;
     }
