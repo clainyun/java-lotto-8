@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    // 상수 정의
     private static final int LOTTO_SIZE = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -17,20 +16,30 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 로또 번호 유효성 검증
+    // 전체 유효성 검증
     private void validate(List<Integer> numbers) {
-        // 1. 개수 검증
+        validateSize(numbers);
+        validateDuplicate(numbers);
+        validateRange(numbers);
+    }
+
+    // 로또 번호 개수 검증
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
+    }
 
-        // 2. 중복 검증
+    // 로또 번호 중복 검증
+    private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (uniqueNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
         }
+    }
 
-        // 3. 범위 검증
+    // 로또 번호 범위 검증
+    private void validateRange(List<Integer> numbers) {
         for (int number : numbers) {
             if (number < MIN_NUMBER || number > MAX_NUMBER) {
                 throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
