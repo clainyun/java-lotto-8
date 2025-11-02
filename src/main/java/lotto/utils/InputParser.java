@@ -8,13 +8,13 @@ public class InputParser {
 
     public static List<Integer> parseWinningNumbers(String input) {
         try {
-            List<Integer> winningNumbers = Arrays.stream(input.split(",", -1)).map(String::trim).map(Integer::parseInt)
-                    .collect(Collectors.toList());
-
-            if (winningNumbers.size() != 6) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
-            }
-            return winningNumbers;
+            return Arrays.stream(input.split(",", -1)) // -1 -> 마지막 빈 항목도 포함
+                    .map(String::trim).map(s -> {
+                        if (s.isEmpty()) { // 예: "1,2,3,4,5,6," -> 마지막 항목 ""
+                            throw new IllegalArgumentException("[ERROR] 당첨 번호 입력 형식이 올바르지 않습니다.");
+                        }
+                        return Integer.parseInt(s); // 숫자 아닌 경우 NumberFormatException 발생
+                    }).collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자만 입력해야 합니다.");
         }
@@ -22,7 +22,11 @@ public class InputParser {
 
     public static int parseBonusNumber(String input) {
         try {
-            return Integer.parseInt(input.trim());
+            String trimmed = input.trim();
+            if (trimmed.isEmpty()) {
+                throw new IllegalArgumentException("[ERROR] 보너스 번호를 입력해야 합니다.");
+            }
+            return Integer.parseInt(trimmed);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.");
         }
